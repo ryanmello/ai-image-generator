@@ -1,5 +1,3 @@
-const { application } = require("express");
-
 function onSubmit(e){
     e.preventDefault();
 
@@ -10,6 +8,8 @@ function onSubmit(e){
         alert('Please add text');
         return;
     }
+
+    console.log(prompt + size);
 
     generateImageRequest(prompt, size);
 }
@@ -39,7 +39,7 @@ async function generateImageRequest(prompt, size){
 
         removeSpinner();
     } catch(error) {
-        docuemnt.querySelector('.msg').textContent = error;
+        document.querySelector('.msg').textContent = error;
     }
 }
 
