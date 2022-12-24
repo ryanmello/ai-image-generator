@@ -9,7 +9,7 @@ function onSubmit(e){
         return;
     }
 
-    console.log(prompt + size);
+    console.log(prompt, size);
 
     generateImageRequest(prompt, size);
 }
@@ -18,6 +18,9 @@ async function generateImageRequest(prompt, size){
     try {
         showSpinner();
 
+        console.log('got here 3')
+
+        // issue here -->
         const response = await fetch('/openai/generateimage', {
             method: 'POST',
             headers: {
@@ -26,13 +29,18 @@ async function generateImageRequest(prompt, size){
             body: JSON.stringify({
                 prompt,
                 size,
-            }),
+            })
         });
+        // <--
+
+        console.log('got here 1');
 
         if(!reponse.ok){
             removeSpinner();
             throw new Error('image could not be generated');
         }
+
+        console.log('got here 2');
 
         const data = await response.json();
         console.log(data);
